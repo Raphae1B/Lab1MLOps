@@ -9,5 +9,7 @@ __pycache__/
 # DVC plots
 dvc_plots
 
+google-chrome-stable_current_amd64.deb
+
 # DVC will add new files after this line
 /model
