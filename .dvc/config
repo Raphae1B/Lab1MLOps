@@ -1,6 +1,6 @@
 [plots]
-    auto_open = true
+    auto_open = false
 [core]
     remote = data
 ['remote "data"']
-    url = gs://mlopsbucket13rb
+    url = gs://mlopsbucket13rb/dvcstore
