@@ -91,6 +91,12 @@ jobs:
           registry: ${{ secrets.GCP_CONTAINER_REGISTRY_HOST }}
           username: _json_key
           password: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+      - name: Remove existing BentoML model if it exists
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if bentoml models get celestial_bodies_classifier_model; then
+            bentoml models delete celestial_bodies_classifier_model
+          fi
       - name: Import the BentoML model
         if: github.ref == 'refs/heads/main'
         run: bentoml models import model/celestial_bodies_classifier_model.bentomodel
