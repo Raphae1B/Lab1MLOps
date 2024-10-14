@@ -93,7 +93,12 @@ jobs:
           password: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
       - name: Import the BentoML model
         if: github.ref == 'refs/heads/main'
-        run: bentoml models import model/celestial_bodies_classifier_model.bentomodel
+        run: |
+          if ! bentoml models get celestial_bodies_classifier_model:dttewkuit63ccabc > /dev/null 2>&1; then
+            bentoml models import model/celestial_bodies_classifier_model.bentomodel
+          else
+            echo "Model already exists, skipping import."
+          fi
       - name: Build the BentoML model artifact
         if: github.ref == 'refs/heads/main'
         run: bentoml build src
